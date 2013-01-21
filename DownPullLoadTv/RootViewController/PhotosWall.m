@@ -20,10 +20,8 @@
 //@synthesize pageControl;
 @synthesize imgeSoure;
 @synthesize detail;
-
-static   int i;
-
-
+@synthesize refreshView;
+@synthesize gridView;
 static UIPageControl *pageControl;
 
 static  int timeCount;
@@ -36,59 +34,94 @@ static  int timeCount;
         self.title=@"Photos Wall";
         
         
-        
+
         
      
         
     }
     return self;
 }
+#pragma mark -refreshView    Method
+- (void)startLoading {
+    [refreshView startLoading];
+    // 模拟3秒后停止
+    [self performSelector:@selector(stopLoading)
+               withObject:nil afterDelay:3];
+}
+// 停止,可以触发自己定义的停止方法
+- (void)stopLoading {
+    [refreshView stopLoading];
+}
+//刷新...
+- (void)refresh {
+    //请求数据.....
+    [[API    sharedInstance] commandWithParams:nil Method:@"GET" PATH:kAPIListPath
+                                  onCompletion:^(id json){
+                                      
+                                      if (imgeSoure) {
+                                          NSLog(@"dsf");
+                                           [imgeSoure removeAllObjects];
+                                          NSLog(@"imgeSource:%d",[imgeSoure count]);
+                                      }
+                                       
+                                      AFHTTPRequestOperation *operation=json;
+                                 
+                                      imgeSoure=[[operation.responseString   JSONValue  ] retain] ;
+                                  
+                                      NSLog(@"刷新成功...");
+                                      
+                                      [self startLoading];
+                                      //加载数据...
+                                       [gridView  reloadData];
+                                      
+                                      
+                                  }];
+    
+    
+    
+}
+
+
+
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
-
-      i=1;
-    
-    
-       
-    
     // Create a reload button
     UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonSystemItemAction target:self action:@selector(reload)];
     self.navigationItem.rightBarButtonItem = reloadButton;
     [reloadButton release];
-
     
-    
-    
-    
-    [[API    sharedInstance] commandWithParams:nil Method:@"GET" PATH:kAPIListPath 
+    [[API    sharedInstance] commandWithParams:nil Method:@"GET" PATH:kAPIListPath
                                   onCompletion:^(id json){
                                      
-               AFHTTPRequestOperation *operation=json;                           
-   
-                imgeSoure=[[NSMutableArray alloc] init];               
+               AFHTTPRequestOperation *operation=json;
+                imgeSoure=[[NSMutableArray alloc] init];                       
+                imgeSoure=[[operation.responseString   JSONValue  ] retain];//必须retain 否则会释放掉...
+                                         
                                       
-    imgeSoure=[[operation.responseString   JSONValue  ] retain] ;
-
+                                      //refreshView
+                                       //使用NSBundle   初始化程序中的xib资源.....相当于init 
+                                      NSArray *nils=[[NSBundle mainBundle ] loadNibNamed:@"RefreshView" owner:self options:nil];
+                                      refreshView =[[nils objectAtIndex:0] retain];
+                                      refreshView.backgroundColor =[UIColor clearColor];
+                                      [ refreshView setupWithOwner:gridView.scrollView delegate:self ];
+                                      
+                                //      [self refresh   ];
                                       
                                       
-                                      
-        gridView.cellMargin = 5;// cell bian yuan
-        gridView.numberOfRows = 6;
-        gridView.numberOfColumns = 3;
+                                    //grideView
+                                      gridView.cellMargin = 5;// cell bian yuan
+                                      gridView.numberOfRows = 4;
+                                      gridView.numberOfColumns = 3;
                                       gridView.backgroundColor=[UIColor clearColor];
                                       
-        gridView.layoutStyle =HorizontalLayout; 
-       // VerticalLayout;
-        
-                                     
-                                      
-                                      
-
-         //
+                                      gridView.layoutStyle =//HorizontalLayout;
+                                      VerticalLayout;
+                                      gridView.scrollView.delegate=self;
+                                  //  pageControl
                                       pageControl=[[UIPageControl alloc] initWithFrame:CGRectMake(0,gridView.frame.size.height-36 , 320, 39)];
                                       pageControl.numberOfPages=gridView.numberOfPages;
                                       pageControl.currentPage=gridView .currentPageIndex;
@@ -103,14 +136,18 @@ static  int timeCount;
                                       
                                       
                                       timeCount=0;
-                                      [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(scrollTimer) userInfo:nil repeats:YES];
+                                      
+                                      //定时滚动..
+                                      
+                                     // [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(scrollTimer) userInfo:nil repeats:YES];
 
       }];
     
-    
+   
 
     
 }
+/*
 //定时滚动
 -(void)scrollTimer{
     timeCount ++;
@@ -120,38 +157,17 @@ static  int timeCount;
     
     [gridView.scrollView setContentOffset:CGPointMake(320 * timeCount, 0) animated:YES];//根据pagecontroll的值来改变scrollview的滚动位置，以此切换到指定的页面
 }
-
+*/
  
  - (void)changePage:(id)sender {
- 
- 
- 
  UIPageControl*pagec=sender;
- 
- 
  int page = pagec.currentPage;//获取当前pagecontroll的值
- 
- NSLog(@"currentPage>>>>>>>>>>>>:%d",page);
- 
      [UIView beginAnimations:nil context:NULL];
      [UIView setAnimationDuration:0.3f];
      [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-     
-     
- 
  [gridView.scrollView setContentOffset:CGPointMake(320 * page, 0) animated:YES];//根据pagecontroll的值来改变scrollview的滚动位置，以此切换到指定的页面
-     
-     
-     [UIView commitAnimations];
-     
-     
+ [UIView commitAnimations];
  }
- 
-
-
-
-
-
 
 - (void)reload
 {
@@ -162,17 +178,8 @@ static  int timeCount;
     //test.xlsx
     
     NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    
-    
-    
     NSData *fileData=[NSData dataWithContentsOfFile:[ documentsDirectory stringByAppendingPathComponent:@"test.xlsx"]];
-    
-
-    
-  
-    
     [[API     sharedInstance] commandWithUploadFiles:@"application/vnd.ms-excel" FileName:@"test.xlsx" FileData:fileData PATH:kAPIUploadPath  onCompletion:^(id json){
     
         NSLog(@"json:%@",json);
@@ -182,14 +189,39 @@ static  int timeCount;
         [gridView  reloadData];
     
     }]; 
-  
+   
+}
+#pragma - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [gridView updateCurrentPageIndex];
+}
+
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    [gridView updateCurrentPageIndex];
+}
+// 刚拖动的时候
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView_ {
+    
+    [refreshView scrollViewWillBeginDragging:scrollView_];
+}
+// 拖动过程中
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView_ {
     
     
+    [refreshView scrollViewDidScroll:scrollView_];
+}
+// 拖动结束后
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView_ willDecelerate:(BOOL)decelerate {
     
-    
-    
-    
-    
+    [refreshView scrollViewDidEndDragging:scrollView_ willDecelerate:decelerate];
+}
+#pragma mark - RefreshViewDelegate
+- (void)refreshViewDidCallBack {
+    [self refresh];
 }
 
 
@@ -210,8 +242,8 @@ static  int timeCount;
 - (void)viewDidUnload {
     [gridView release];
     gridView = nil;
-    //[pageControl release];
-   // pageControl = nil;
+    [pageControl release];
+    pageControl = nil;
     [super viewDidUnload];
 }
 
@@ -374,7 +406,7 @@ static  int timeCount;
     
 
  
-    
+    [refreshView release];
     [detail release];
     [gridView release];
    [pageControl release];

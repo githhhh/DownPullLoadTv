@@ -11,6 +11,10 @@
 		2A1DC146169800E500E7A2EC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1DC145169800E500E7A2EC /* ImageIO.framework */; };
 		2A1DC148169800F700E7A2EC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A1DC147169800F700E7A2EC /* MapKit.framework */; };
 		2A85AE16169C09E1005EF27F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A85AE14169C09DF005EF27F /* DetailViewController.m */; };
+		2A85E2F516A8DC72000B0BB1 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A85E2F016A8DC71000B0BB1 /* blueArrow.png */; };
+		2A85E2F616A8DC72000B0BB1 /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A85E2F116A8DC71000B0BB1 /* blueArrow@2x.png */; };
+		2A85E2F716A8DC72000B0BB1 /* RefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A85E2F316A8DC71000B0BB1 /* RefreshView.m */; };
+		2A85E2F816A8DC72000B0BB1 /* RefreshView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A85E2F416A8DC71000B0BB1 /* RefreshView.xib */; };
 		2A8EF93C169915D800704568 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2A8EF930169915D800704568 /* readme.txt */; };
 		2A8EF93D169915D800704568 /* SDDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8EF932169915D800704568 /* SDDataCache.m */; };
 		2A8EF93E169915D800704568 /* SDImageView+SDWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8EF934169915D800704568 /* SDImageView+SDWebCache.m */; };
@@ -35,10 +39,6 @@
 		2A909F6D169E99F4005F7EFF /* j1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2A909F69169E99F4005F7EFF /* j1.jpg */; };
 		2A9254871697CB6700219658 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9254861697CB6700219658 /* EGORefreshTableHeaderView.m */; };
 		2A92548C1697CB8A00219658 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A92548B1697CB8A00219658 /* RootViewController.m */; };
-		2A9254991697CBA000219658 /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A92548E1697CBA000219658 /* blackArrow.png */; };
-		2A92549A1697CBA000219658 /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A92548F1697CBA000219658 /* blackArrow@2x.png */; };
-		2A92549B1697CBA000219658 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A9254901697CBA000219658 /* blueArrow.png */; };
-		2A92549C1697CBA000219658 /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A9254911697CBA000219658 /* blueArrow@2x.png */; };
 		2A92549D1697CBA000219658 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A9254921697CBA000219658 /* grayArrow.png */; };
 		2A92549E1697CBA000219658 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A9254931697CBA000219658 /* grayArrow@2x.png */; };
 		2A92549F1697CBA000219658 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A9254941697CBA000219658 /* MainWindow.xib */; };
@@ -107,6 +107,11 @@
 		2A1DC147169800F700E7A2EC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2A85AE13169C09DF005EF27F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		2A85AE14169C09DF005EF27F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		2A85E2F016A8DC71000B0BB1 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		2A85E2F116A8DC71000B0BB1 /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
+		2A85E2F216A8DC71000B0BB1 /* RefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshView.h; sourceTree = "<group>"; };
+		2A85E2F316A8DC71000B0BB1 /* RefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshView.m; sourceTree = "<group>"; };
+		2A85E2F416A8DC71000B0BB1 /* RefreshView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshView.xib; sourceTree = "<group>"; };
 		2A8EF930169915D800704568 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		2A8EF931169915D800704568 /* SDDataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDDataCache.h; sourceTree = "<group>"; };
 		2A8EF932169915D800704568 /* SDDataCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDDataCache.m; sourceTree = "<group>"; };
@@ -151,10 +156,6 @@
 		2A9254861697CB6700219658 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		2A92548A1697CB8A00219658 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		2A92548B1697CB8A00219658 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		2A92548E1697CBA000219658 /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
-		2A92548F1697CBA000219658 /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
-		2A9254901697CBA000219658 /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
-		2A9254911697CBA000219658 /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
 		2A9254921697CBA000219658 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
 		2A9254931697CBA000219658 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
 		2A9254941697CBA000219658 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -280,6 +281,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A85E2EF16A8DC71000B0BB1 /* RefreshView */ = {
+			isa = PBXGroup;
+			children = (
+				2A85E2F016A8DC71000B0BB1 /* blueArrow.png */,
+				2A85E2F116A8DC71000B0BB1 /* blueArrow@2x.png */,
+				2A85E2F216A8DC71000B0BB1 /* RefreshView.h */,
+				2A85E2F316A8DC71000B0BB1 /* RefreshView.m */,
+				2A85E2F416A8DC71000B0BB1 /* RefreshView.xib */,
+			);
+			path = RefreshView;
+			sourceTree = "<group>";
+		};
 		2A8EF92F169915D800704568 /* SDWebData_1.0.2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,10 +374,6 @@
 		2A92548D1697CBA000219658 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2A92548E1697CBA000219658 /* blackArrow.png */,
-				2A92548F1697CBA000219658 /* blackArrow@2x.png */,
-				2A9254901697CBA000219658 /* blueArrow.png */,
-				2A9254911697CBA000219658 /* blueArrow@2x.png */,
 				2A9254921697CBA000219658 /* grayArrow.png */,
 				2A9254931697CBA000219658 /* grayArrow@2x.png */,
 				2A9254941697CBA000219658 /* MainWindow.xib */,
@@ -380,6 +389,7 @@
 		2A9538A41697CA710097A0BA = {
 			isa = PBXGroup;
 			children = (
+				2A85E2EF16A8DC71000B0BB1 /* RefreshView */,
 				2AB804FB16A3DBEB007239B6 /* MobileCoreServices.framework */,
 				2AB804F916A3DBE2007239B6 /* SystemConfiguration.framework */,
 				2A9B7223169FF2FD006A6C82 /* MMGrideView */,
@@ -641,10 +651,6 @@
 				2A9538C61697CA720097A0BA /* Default.png in Resources */,
 				2A9538C81697CA720097A0BA /* Default@2x.png in Resources */,
 				2A9538CA1697CA720097A0BA /* Default-568h@2x.png in Resources */,
-				2A9254991697CBA000219658 /* blackArrow.png in Resources */,
-				2A92549A1697CBA000219658 /* blackArrow@2x.png in Resources */,
-				2A92549B1697CBA000219658 /* blueArrow.png in Resources */,
-				2A92549C1697CBA000219658 /* blueArrow@2x.png in Resources */,
 				2A92549D1697CBA000219658 /* grayArrow.png in Resources */,
 				2A92549E1697CBA000219658 /* grayArrow@2x.png in Resources */,
 				2A92549F1697CBA000219658 /* MainWindow.xib in Resources */,
@@ -675,6 +681,9 @@
 				2AB8050216A3E7BD007239B6 /* u3.jpg in Resources */,
 				2AB8050316A3E7BD007239B6 /* u2.jpg in Resources */,
 				2AB8050416A3E7BD007239B6 /* u1.jpg in Resources */,
+				2A85E2F516A8DC72000B0BB1 /* blueArrow.png in Resources */,
+				2A85E2F616A8DC72000B0BB1 /* blueArrow@2x.png in Resources */,
+				2A85E2F816A8DC72000B0BB1 /* RefreshView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,6 +735,7 @@
 				2A9B7228169FF2FD006A6C82 /* MMGridView.m in Sources */,
 				2A9B7229169FF2FD006A6C82 /* MMGridViewCell.m in Sources */,
 				2A9B722E169FFACE006A6C82 /* MMGridViewDefaultCell.m in Sources */,
+				2A85E2F716A8DC72000B0BB1 /* RefreshView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

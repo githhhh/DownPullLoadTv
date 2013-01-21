@@ -10,7 +10,7 @@
 #import "LoginViewController.h"
 #import "RootViewController.h"
 #import "API.h"
-
+#import "RefreshView.h"
 @interface LoginViewController ()
 
 @end
@@ -80,11 +80,9 @@
            
            
             pw=[[PhotosWall alloc] initWithNibName:@"PhotosWall" bundle:nil] ;
+                       
             
-            
-            
-            
-            
+           
             
             
             

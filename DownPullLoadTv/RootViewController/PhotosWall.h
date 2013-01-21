@@ -12,14 +12,20 @@
 #import "MMGridViewDefaultCell.h"
 #import "EGORefreshTableHeaderView.h"
 #import "DetailViewController.h"
-@interface PhotosWall : UIViewController<MMGridViewDataSource,MMGridViewDelegate>
+
+
+
+
+#import "RefreshView.h"
+
+@interface PhotosWall : UIViewController<MMGridViewDataSource,MMGridViewDelegate,RefreshViewDelegate,UIScrollViewDelegate>
 
 {
 
     //,UIImagePickerControllerDelegate,UINavigationControllerDelegate
     
-    IBOutlet MMGridView *gridView;
-
+     MMGridView *gridView;
+    RefreshView *refreshView;
   
 
 }
@@ -27,9 +33,9 @@
 
 
 
+@property(nonatomic,retain) IBOutlet  MMGridView *gridView;
 
-
-
+@property(nonatomic,retain)RefreshView *refreshView;
 
 @property(nonatomic,retain)NSMutableArray *imgeSoure;
 @property(nonatomic,retain)DetailViewController  *detail;

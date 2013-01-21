@@ -147,10 +147,18 @@
         
         [self.scrollView setContentSize:contentSize];
         
+        
+        
+        
+        /*
+        // 移除所有  view
+         NSLog(@"scrollView.subviews :%d",self.scrollView.subviews.count);
         for (UIView *v in self.scrollView.subviews) {
+            
+            
             [v removeFromSuperview];
-        }
-
+        }*/
+      //  NSLog(@"移除后scrollView.subviews :%d",self.scrollView.subviews.count);
         for (NSInteger i = 0; i < [self.dataSource numberOfCellsInGridView:self]; i++) {
             MMGridViewCell *cell = [self.dataSource gridView:self cellAtIndex:i];
             [cell performSelector:@selector(setGridView:) withObject:self];

@@ -77,5 +77,6 @@ typedef enum {
 @property (nonatomic) GridLayoutStyle layoutStyle;
 
 - (void)reloadData;
+- (void)updateCurrentPageIndex;
 
 @end
