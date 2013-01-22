@@ -46,6 +46,11 @@
 		2A9254A11697CBA000219658 /* TableViewPull-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A9254961697CBA000219658 /* TableViewPull-Info.plist */; };
 		2A9254A21697CBA000219658 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A9254971697CBA000219658 /* whiteArrow.png */; };
 		2A9254A31697CBA000219658 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A9254981697CBA000219658 /* whiteArrow@2x.png */; };
+		2A93F3AC16AE316A00BB6B10 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A93F3AB16AE316A00BB6B10 /* camera.png */; };
+		2A93F3B516AE87C900BB6B10 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A93F3B416AE87C900BB6B10 /* icon.png */; };
+		2A93F3BB16AE89EB00BB6B10 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A93F3BA16AE89EB00BB6B10 /* icon@2x.png */; };
+		2A93F3BE16AE8A1900BB6B10 /* icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A93F3BC16AE8A1900BB6B10 /* icon_ipad.png */; };
+		2A93F3BF16AE8A1900BB6B10 /* icon_ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A93F3BD16AE8A1900BB6B10 /* icon_ipad@2x.png */; };
 		2A9538B41697CA720097A0BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9538B31697CA720097A0BA /* UIKit.framework */; };
 		2A9538B61697CA720097A0BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9538B51697CA720097A0BA /* Foundation.framework */; };
 		2A9538B81697CA720097A0BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A9538B71697CA720097A0BA /* CoreGraphics.framework */; };
@@ -163,6 +168,11 @@
 		2A9254961697CBA000219658 /* TableViewPull-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TableViewPull-Info.plist"; sourceTree = "<group>"; };
 		2A9254971697CBA000219658 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
 		2A9254981697CBA000219658 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
+		2A93F3AB16AE316A00BB6B10 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		2A93F3B416AE87C900BB6B10 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		2A93F3BA16AE89EB00BB6B10 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		2A93F3BC16AE8A1900BB6B10 /* icon_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_ipad.png; sourceTree = "<group>"; };
+		2A93F3BD16AE8A1900BB6B10 /* icon_ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_ipad@2x.png"; sourceTree = "<group>"; };
 		2A9538AF1697CA720097A0BA /* DownPullLoadTv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DownPullLoadTv.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A9538B31697CA720097A0BA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2A9538B51697CA720097A0BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -374,6 +384,10 @@
 		2A92548D1697CBA000219658 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2A93F3BC16AE8A1900BB6B10 /* icon_ipad.png */,
+				2A93F3BD16AE8A1900BB6B10 /* icon_ipad@2x.png */,
+				2A93F3BA16AE89EB00BB6B10 /* icon@2x.png */,
+				2A93F3B416AE87C900BB6B10 /* icon.png */,
 				2A9254921697CBA000219658 /* grayArrow.png */,
 				2A9254931697CBA000219658 /* grayArrow@2x.png */,
 				2A9254941697CBA000219658 /* MainWindow.xib */,
@@ -439,6 +453,7 @@
 		2A9538BA1697CA720097A0BA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2A93F3AB16AE316A00BB6B10 /* camera.png */,
 				2AB804FD16A3E7BD007239B6 /* u4.jpg */,
 				2AB804FE16A3E7BD007239B6 /* u3.jpg */,
 				2AB804FF16A3E7BD007239B6 /* u2.jpg */,
@@ -684,6 +699,11 @@
 				2A85E2F516A8DC72000B0BB1 /* blueArrow.png in Resources */,
 				2A85E2F616A8DC72000B0BB1 /* blueArrow@2x.png in Resources */,
 				2A85E2F816A8DC72000B0BB1 /* RefreshView.xib in Resources */,
+				2A93F3AC16AE316A00BB6B10 /* camera.png in Resources */,
+				2A93F3B516AE87C900BB6B10 /* icon.png in Resources */,
+				2A93F3BB16AE89EB00BB6B10 /* icon@2x.png in Resources */,
+				2A93F3BE16AE8A1900BB6B10 /* icon_ipad.png in Resources */,
+				2A93F3BF16AE8A1900BB6B10 /* icon_ipad@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UMSocialBar.h"
-@interface DetailViewController : UIViewController<UMSocialBarDelegate>
+@interface DetailViewController : UIViewController<UMSocialBarDelegate,UIActionSheetDelegate>
 
 @property(nonatomic,retain)UIImage *imageP;
 

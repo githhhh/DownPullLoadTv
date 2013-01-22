@@ -49,7 +49,7 @@
     
     // control
     isLoading = NO;
-    NSLog(@"停止动画...");
+   // NSLog(@"停止动画...");
    // self.owner.contentInset = UIEdgeInsetsMake(-self.owner.contentOffset.y, 0, 0, 0);
     // Animation
     [UIView beginAnimations:nil context:NULL];
@@ -79,7 +79,7 @@
 - (void)startLoading {
     // control
     isLoading = YES;
-    NSLog(@"开始动画....");
+   // NSLog(@"开始动画....");
     // Animation
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
@@ -107,14 +107,14 @@
         
         // Update the content inset, good for section headers
         if (scrollView.contentOffset.y >= 0){
-           NSLog(@"1");
+          // NSLog(@"1");
             scrollView.contentInset = UIEdgeInsetsZero;
         }
             
         else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
         {
-             NSLog(@"2");
-            NSLog(@"scrollView.contentOffset.y::%f",scrollView.contentOffset.y);
+            // NSLog(@"2");
+            //NSLog(@"scrollView.contentOffset.y::%f",scrollView.contentOffset.y);
             
             scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
 

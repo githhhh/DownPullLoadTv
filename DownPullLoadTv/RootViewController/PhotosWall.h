@@ -18,11 +18,11 @@
 
 #import "RefreshView.h"
 
-@interface PhotosWall : UIViewController<MMGridViewDataSource,MMGridViewDelegate,RefreshViewDelegate,UIScrollViewDelegate>
+@interface PhotosWall : UIViewController<MMGridViewDataSource,MMGridViewDelegate,RefreshViewDelegate,UIScrollViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
 
 {
 
-    //,UIImagePickerControllerDelegate,UINavigationControllerDelegate
+    
     
      MMGridView *gridView;
     RefreshView *refreshView;

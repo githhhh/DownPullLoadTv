@@ -11,7 +11,7 @@
 #import "API.h"
 #import "UIImageView+AFNetworking.h"
 @interface PhotosWall ()
-- (void)reload;
+- (void)upload;
 //- (void)setupPageControl;
 @end
 
@@ -25,18 +25,14 @@
 static UIPageControl *pageControl;
 
 static  int timeCount;
+
+static  NSData *data;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
         self.title=@"Photos Wall";
-        
-        
-
-        
-     
         
     }
     return self;
@@ -59,9 +55,9 @@ static  int timeCount;
                                   onCompletion:^(id json){
                                       
                                       if (imgeSoure) {
-                                          NSLog(@"dsf");
+                                         // NSLog(@"dsf");
                                            [imgeSoure removeAllObjects];
-                                          NSLog(@"imgeSource:%d",[imgeSoure count]);
+                                         // NSLog(@"imgeSource:%d",[imgeSoure count]);
                                       }
                                        
                                       AFHTTPRequestOperation *operation=json;
@@ -76,21 +72,21 @@ static  int timeCount;
                                       
                                       
                                   }];
-    
-    
-    
 }
-
-
-
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     // Create a reload button
-    UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonSystemItemAction target:self action:@selector(reload)];
+    UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonSystemItemAction target:self action:@selector(openMemu)];
+    
+    
+    
+  //  [reloadButton    setImage:[UIImage imageNamed:@"camera.png"] ];
+    
+    
+    
+    
     self.navigationItem.rightBarButtonItem = reloadButton;
     [reloadButton release];
     
@@ -106,6 +102,7 @@ static  int timeCount;
                                        //使用NSBundle   初始化程序中的xib资源.....相当于init 
                                       NSArray *nils=[[NSBundle mainBundle ] loadNibNamed:@"RefreshView" owner:self options:nil];
                                       refreshView =[[nils objectAtIndex:0] retain];
+                                      
                                       refreshView.backgroundColor =[UIColor clearColor];
                                       [ refreshView setupWithOwner:gridView.scrollView delegate:self ];
                                       
@@ -114,7 +111,7 @@ static  int timeCount;
                                       
                                     //grideView
                                       gridView.cellMargin = 5;// cell bian yuan
-                                      gridView.numberOfRows = 4;
+                                      gridView.numberOfRows = 6;
                                       gridView.numberOfColumns = 3;
                                       gridView.backgroundColor=[UIColor clearColor];
                                       
@@ -130,9 +127,6 @@ static  int timeCount;
                                       pageControl.backgroundColor=[UIColor clearColor];
                                                
         [gridView addSubview:pageControl];
-                                      
-                                      
-                                      [gridView bringSubviewToFront:pageControl];
                                       
                                       
                                       timeCount=0;
@@ -169,28 +163,206 @@ static  int timeCount;
  [UIView commitAnimations];
  }
 
-- (void)reload
+-(void)openMemu
 {
+    UIActionSheet *actionSheet=[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"打开相机" otherButtonTitles:@"从图库选择",@"从相机胶卷选择", nil];
+
+    [actionSheet showInView:self.view];
+    [actionSheet release];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==actionSheet.cancelButtonIndex) {
+
+        
+        NSLog(@"取消.%d",actionSheet.cancelButtonIndex);
+    }else
+    {
+
+    UIImagePickerController *picker=[[UIImagePickerController alloc] init];
+    picker.delegate=self;
+    picker.modalTransitionStyle=UIModalTransitionStyleCoverVertical;
+    picker.allowsEditing=YES;
+    
+    switch (buttonIndex) {
+        case 0://相机
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                picker.sourceType=UIImagePickerControllerSourceTypeCamera;
+                [self presentModalViewController:picker animated:YES];
+
+                [picker release];
+            }else
+            {
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"error" message:@"该设备找不到相机" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert show ];
+                [alert release];
+
+            }
+
+            break;
+        case 1: //图库...
+           
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+                picker.sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+                [self  presentModalViewController:picker animated:YES]; 
+                [picker release];
+                
+            }else
+            {
+                
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"error" message:@"该设备找不到图库" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert show ];
+                [alert release];
+            }
+            break;
+            case 2://相机胶卷
+            
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+                picker.sourceType=UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                [self presentModalViewController:picker animated:YES];
+                [picker release];
+            }else
+            {
+                
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"error" message:@"该设备找不到相机胶卷" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [alert show ];
+                [alert release];
+            }
+            
+            
+            break;
+        default:
+            break;
+     }
+
+    }
+
+
+}
+
+
     //上传   图片......
-    //UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"j4.jpg" ]];
-    
-   // NSData *imageData = UIImagePNGRepresentation(image);
-    //test.xlsx
-    
-    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSData *fileData=[NSData dataWithContentsOfFile:[ documentsDirectory stringByAppendingPathComponent:@"test.xlsx"]];
-    [[API     sharedInstance] commandWithUploadFiles:@"application/vnd.ms-excel" FileName:@"test.xlsx" FileData:fileData PATH:kAPIUploadPath  onCompletion:^(id json){
-    
-        NSLog(@"json:%@",json);
-        if (imgeSoure) {
-            [imgeSoure addObject:(NSString *)json];
-        }
-        [gridView  reloadData];
-    
-    }]; 
+- (void)upload
+{
+    /* NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+     NSString *documentsDirectory = [paths objectAtIndex:0];
+     NSData *fileData=[NSData dataWithContentsOfFile:[ documentsDirectory stringByAppendingPathComponent:@"test.xlsx"]];
+     [[API     sharedInstance] commandWithUploadFiles:@"application/vnd.ms-excel" FileName:@"test.xlsx" FileData:fileData PATH:kAPIUploadPath  onCompletion:^(id json){
+     
+     NSLog(@"json:%@",json);
+     if (imgeSoure) {
+     [imgeSoure addObject:(NSString *)json];
+     }
+     [gridView  reloadData];
+     
+     }]; */
    
 }
+#pragma mark 保存图片到document
+
+-(NSString *)saveImage:(NSData *)data WithName:(NSString * )imageName
+
+{
+    
+    //图片保存的路径
+    //这里将图片放在沙盒的documents文件夹中
+    NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    //文件管理器
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
+    [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    //得到选择后沙盒中图片的完整路径
+    NSString *  filePath = [DocumentsPath stringByAppendingPathComponent:imageName];
+    
+    [fileManager createFileAtPath:filePath contents:data attributes:nil];
+    
+    return filePath;
+}
+
+
+
+#pragma mark -UIImagePickerDelegate
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+
+//上传
+    NSString *extion;
+    
+    
+      NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    if ([type isEqualToString:@"public.image"]) {//选中的是图片
+   
+        UIImage *img = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    
+       
+        if (UIImagePNGRepresentation(img)==nil) {
+            data=UIImageJPEGRepresentation(img, 1.0);
+            extion=@"jpeg";
+        }else
+        {
+            data=UIImagePNGRepresentation(img) ;
+            extion=@"png";
+        }
+
+    NSDateFormatter *f=[[NSDateFormatter alloc] init];
+    [f setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *imgeName= [f stringFromDate:[NSDate date]] ;
+//保持图片 到沙盒
+   [self saveImage:data WithName:[NSString stringWithFormat:@"%@.%@",imgeName,extion]];
+    [f release];
+    
+     //test.xlsx
+     
+//发送................................................
+    [[API     sharedInstance] commandWithUploadFiles:[ NSString stringWithFormat:@"image/%@",extion] FileName:[NSString stringWithFormat:@"%@.%@",imgeName,extion] FileData:data PATH:kAPIUploadPath  onCompletion:^(id json){
+     
+     NSLog(@"json:%@",json);
+     if (imgeSoure) {
+     [imgeSoure addObject:(NSString *)json];
+     }
+     [gridView  reloadData];
+        
+    }]; 
+
+    
+  [picker dismissModalViewControllerAnimated:YES];
+
+       
+        /* //类似微薄选择图后的效果
+         UIImageView *smallimage = [[[UIImageView alloc] initWithFrame:
+         CGRectMake(50, 120, 40, 40)] autorelease];
+         
+         smallimage.image = image;
+         //加在视图中
+         [self.view addSubview:smallimage];*/
+        
+        
+        
+    }
+
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+
+    [picker dismissModalViewControllerAnimated:YES];
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 #pragma - UIScrollViewDelegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -404,7 +576,7 @@ static  int timeCount;
 -(void)dealloc
 {
     
-
+[data release];//释放图片...
  
     [refreshView release];
     [detail release];

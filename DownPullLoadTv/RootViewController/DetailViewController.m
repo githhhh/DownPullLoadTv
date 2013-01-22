@@ -16,6 +16,9 @@
 @implementation DetailViewController
 @synthesize imageP;
 @synthesize url ;
+
+static  NSString* msg;
+static UILabel *label;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,7 +37,7 @@
     self = [super initWithNibName:@"DetailViewController" bundle:nil];
     if (self) {
         
-        UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithTitle:@"下载" style:UIBarButtonSystemItemAction target:self action:@selector(reload)];
+        UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithTitle:@"下载" style:UIBarButtonSystemItemAction target:self action:@selector(openMemu)];
         self.navigationItem.rightBarButtonItem = reloadButton;
         [reloadButton release];
 
@@ -79,14 +82,114 @@
         [imageView     release];
 
         
+        //加提示
+       label=[[UILabel alloc] initWithFrame:CGRectMake(0,342,320 , 30)];
+        msg=@"";
+        label.text=msg;
+        label.textAlignment= UITextAlignmentCenter;
+        label.backgroundColor=[UIColor clearColor];
+        label.textColor=[UIColor whiteColor ];
+        [self.view addSubview:label];
+        [self.view sendSubviewToBack:label];
+
+        
+             
     }
     return self;
     
     
 
 }
+-(void)openMemu
+{
+    UIActionSheet *actionSheet=[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"保存到相册" otherButtonTitles:@"保存到沙盒(Documents)", nil];
+    
+    [actionSheet showInView:self.view];
+    [actionSheet release];
+}
 
--(void)reload
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==actionSheet.cancelButtonIndex) {
+        NSLog(@"取消");
+    }
+    switch (buttonIndex) {
+        case 0://相册
+           
+            [self saveAlbum];
+            break;
+        case 1://Documents
+            
+            [self saveDocuments];
+            break;
+  
+        default:
+            break;
+    }
+}
+
+   
+
+-(void)addMessge
+{
+   
+    
+    [self.view sendSubviewToBack:label];
+    
+
+}
+
+
+
+
+-(void)saveAlbum
+{
+    
+    NSString *fileName=[ self.url pathExtension];
+    
+    
+    
+    if ([[fileName lowercaseString] isEqualToString:@"jpg"]||[[fileName lowercaseString] isEqualToString:@"jpeg"]||[[fileName lowercaseString] isEqualToString:@"png"]) {
+         UIImageWriteToSavedPhotosAlbum(imageP, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    }else
+    {
+      
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"error" message:[ NSString stringWithFormat:@"错误的文件类型:*.%@",fileName] delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil , nil];
+        [alert show    ];
+        [alert release];
+
+    
+    
+    }
+   
+
+
+}
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error
+  contextInfo:(void *)contextInfo
+{
+
+    if (error!=NULL) {
+        NSLog(@"保存错误....");
+         msg=@"保存错误....";
+        
+    }else
+    {
+        NSLog(@"保存到相册成功..");
+        msg=@"保存到相册成功..";
+            
+        
+        
+    }
+    [label setText:msg];
+    [self.view bringSubviewToFront:label];
+[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(addMessge)  userInfo:Nil repeats:YES];
+
+
+
+}
+
+-(void)saveDocuments
 {
     NSLog(@"下载....");
     
@@ -100,21 +203,26 @@
     
      NSLog(@"fileName::::%@",[self.url lastPathComponent    ]);
    
- 
-    
     if ([[fileName lowercaseString] isEqualToString:@"jpg"]||[[fileName lowercaseString] isEqualToString:@"jpeg"]) {
         [ UIImageJPEGRepresentation(imageP, 1.0) writeToFile:[documentsDirectory stringByAppendingPathComponent:[[NSString alloc] initWithFormat:@"%@",[self.url lastPathComponent]]] options:NSAtomicWrite error:nil]
         ;
         
         NSLog(@"下载.成功..");
+         msg=@"下载.成功...";
+        [label setText:msg];
+        [self.view bringSubviewToFront:label];
         
+         [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(addMessge)  userInfo:Nil repeats:YES];
         return;
     }
     if ([[fileName lowercaseString] isEqualToString:@"png"]) {
         [UIImagePNGRepresentation(imageP) writeToFile:[documentsDirectory stringByAppendingPathComponent:[[NSString alloc] initWithFormat:@"%@",[self.url lastPathComponent]]]  options:NSAtomicWrite error:nil];
         
         NSLog(@"下载.成功..");
-        
+         msg=@"下载.成功...";
+        [label setText:msg];
+            [self.view bringSubviewToFront:label];
+         [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(addMessge)  userInfo:Nil repeats:YES];
         return;
     }
     //下载文件....
@@ -127,9 +235,13 @@
               [operation.responseData writeToFile:[documentsDirectory stringByAppendingPathComponent:[[NSString alloc] initWithFormat:@"%@",[self.url lastPathComponent]]] options:NSAtomicWrite error:nil];
              NSLog(@"下载成功....%@",[self.url lastPathComponent]);
        
-        
-        
+          msg=@"下载.成功...";
+        [label setText:msg];
+            [self.view bringSubviewToFront:label];
+         [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(addMessge)  userInfo:Nil repeats:YES];
     }];
+    
+   
 
 }
 
@@ -152,8 +264,12 @@
 }
 
 
+-(void)viewDidUnload
+{
+  [label release];
 
-
+    [super viewDidUnload];
+}
 
 
 
@@ -164,7 +280,7 @@
 }
 
 - (void)dealloc {
-  
+  [label release];
     [imageP release];
     [url release];
     [super dealloc];
